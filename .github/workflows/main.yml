@@ -16,6 +16,9 @@ jobs:
           - libressl
           - openssl
     steps:
+      - name: Lowercase REPO
+        run: |
+          echo "REPO=${GITHUB_REPOSITORY,,}" >>${GITHUB_ENV}
       - name: Checkout from GitHub
         uses: actions/checkout@v4
       - name: Setup qemu
@@ -44,10 +47,10 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
-          tags: ghcr.io/${{ github.repository }}:${{ matrix.library }},ghcr.io/${{ github.repository }}:${{ env.VERSION }}
+          tags: ghcr.io/${{ env.REPO }}:${{ matrix.library }},ghcr.io/${{ env.REPO }}:${{ env.VERSION }}
       - name: Extract docker build artifacts
         run: |
-          ./extract-artifacts.sh ghcr.io/${{ github.repository }} ${{ env.VERSION }} ${{ matrix.library }}
+          ./extract-artifacts.sh ghcr.io/${{ env.REPO }} ${{ env.VERSION }} ${{ matrix.library }}
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
