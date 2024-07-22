@@ -147,6 +147,7 @@ CXX=/usr/bin/clang++ \
    --with-http_xslt_module \
    --with-poll_module \
    --with-select_module \
+   --with-stream \
    --with-zlib-asm=CPU \
    --with-zlib-opt="-O3" \
    --add-module=/usr/src/echo-nginx-module \
