@@ -213,12 +213,12 @@ CC=/usr/bin/clang \
 CXX=/usr/bin/clang++ \
 ./configure \
    --build="${SSL_COMMIT} ngx_brotli-$(git --git-dir=/usr/src/ngx_brotli/.git rev-parse --short HEAD) headers-more-nginx-module-${MODULE_NGINX_HEADERS_MORE} echo-nginx-module-${MODULE_NGINX_ECHO} nginx-module-vts-${MODULE_NGINX_VTS} nginx_cookie_flag_module-${MODULE_NGINX_COOKIE_FLAG} njs-${MODULE_NGINX_NJS} ngx_http_substitutions_filter_module-latest" \
-   --prefix=/var/lib/nginx \
+   --prefix=/etc/nginx \
    --sbin-path=/usr/sbin/nginx \
    --modules-path=/usr/lib/nginx/modules \
    --conf-path=/etc/nginx/nginx.conf \
-   --pid-path=/run/nginx/nginx.pid \
-   --lock-path=/run/nginx/nginx.lock \
+   --pid-path=/var/run/nginx.pid \
+   --lock-path=/var/run/nginx.lock \
    --http-client-body-temp-path=/var/lib/nginx/tmp/client_body \
    --http-proxy-temp-path=/var/lib/nginx/tmp/proxy \
    --http-fastcgi-temp-path=/var/lib/nginx/tmp/fastcgi \
@@ -229,12 +229,15 @@ CXX=/usr/bin/clang++ \
    --with-cc-opt="-I/usr/include/libxml2 -I/usr/src/aws-lc/install/include -O3 -static -Wno-sign-compare -Wno-conditional-uninitialized -Wno-unused-but-set-variable" \
    --with-compat \
    --with-file-aio \
+   --with-threads \
    --with-http_addition_module \
    --with-http_auth_request_module \
    --with-http_dav_module \
+   --with-http_flv_module \
    --with-http_degradation_module \
    --with-http_gunzip_module \
    --with-http_gzip_static_module \
+   --with-http_mp4_module \
    --with-http_random_index_module \
    --with-http_realip_module \
    --with-http_secure_link_module \
@@ -252,6 +255,12 @@ CXX=/usr/bin/clang++ \
    --with-poll_module \
    --with-select_module \
    --with-threads \
+   --with-mail \
+   --with-mail_ssl_module \
+   --with-stream \
+   --with-stream_realip_module \
+   --with-stream_ssl_module \
+   --with-stream_ssl_preread_module \
    --with-zlib-asm=CPU \
    --with-zlib-opt="-O3" \
    --with-zlib=/usr/src/zlib \
